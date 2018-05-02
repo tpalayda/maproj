@@ -1,6 +1,7 @@
 package tpalayda.barcodescanner;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,8 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MenuActivity.this,"clicked",Toast.LENGTH_LONG).show();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                BarcodeFragment bf = new BarcodeFragment();
-                ft.commit();
+                Intent intent = new Intent(MenuActivity.this,BarcodeFragmentActivity.class);
+                startActivity(intent);
             }
         });
     }
