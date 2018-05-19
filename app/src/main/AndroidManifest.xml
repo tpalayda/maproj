@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".application.BarcodeFragmentActivity" />
-        <activity android:name=".application.BlankActivity"></activity>
+        <activity android:name=".application.BlankActivity" />
+        <activity android:name=".application.BarcodeListActivity"></activity>
     </application>
 
 </manifest>

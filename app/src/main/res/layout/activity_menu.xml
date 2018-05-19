@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:gravity="center">
         <Button
-            android:id="@+id/tes2"
+            android:id="@+id/scan_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -29,7 +29,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/view_id"
+            android:id="@+id/show_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30px"

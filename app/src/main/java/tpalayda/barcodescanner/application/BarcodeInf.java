@@ -35,6 +35,9 @@ public class BarcodeInf {
     public UUID getUUID(){
         return m_id;
     }
+    public int getPrice(){
+        return m_price;
+    }
 
     public String getProductName() {
         return m_productName;
@@ -46,6 +49,9 @@ public class BarcodeInf {
 
     public void setBarcodeID(String barcodeID) {
         this.m_barcodeID = barcodeID;
+    }
+    public void setPrice(int price) {
+        this.m_price = price;
     }
 
     public void setProductName(String productName) {
