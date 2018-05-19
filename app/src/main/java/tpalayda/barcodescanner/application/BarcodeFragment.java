@@ -1,11 +1,8 @@
-package tpalayda.barcodescanner;
+package tpalayda.barcodescanner.application;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -18,6 +15,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.List;
 
 import info.androidhive.barcode.BarcodeReader;
+import tpalayda.barcodescanner.R;
 
 
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
