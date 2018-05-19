@@ -11,12 +11,22 @@ public class BarcodeInf {
     private String m_productName;
     private String m_category;
     private UUID m_id;
+    private int m_price;
+
+    public BarcodeInf(String barcodeID,String productName,String category,UUID id,int price) {
+        m_barcodeID = barcodeID;
+        m_productName = productName;
+        m_category = category;
+        m_id = id;
+        m_price = price;
+    }
 
     public BarcodeInf(String barcodeID,String productName,String category,UUID id) {
         m_barcodeID = barcodeID;
         m_productName = productName;
         m_category = category;
         m_id = id;
+        m_price = 0;
     }
 
     public String getBarcodeID() {
