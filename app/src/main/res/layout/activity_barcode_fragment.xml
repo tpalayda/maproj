@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    tools:context="tpalayda.barcodescanner.BarcodeFragmentActivity">
+    tools:context="tpalayda.barcodescanner.application.BarcodeFragmentActivity">
 
 </android.support.constraint.ConstraintLayout>

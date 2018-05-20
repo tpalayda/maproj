@@ -1,10 +1,8 @@
-package tpalayda.barcodescanner;
+package tpalayda.barcodescanner.application;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -17,12 +15,13 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.List;
 
 import info.androidhive.barcode.BarcodeReader;
+import tpalayda.barcodescanner.R;
 
 
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
 
     private BarcodeReader m_barcodeReader;
-
+    private final int BARCODE_KEY = 111;
     public BarcodeFragment(){}
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -48,6 +47,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
             @Override
             public void run() {
                 Toast.makeText(getActivity(), "Barcode:" + barcode.displayValue, Toast.LENGTH_SHORT).show();
+                sendToBlankActivity(barcode.displayValue);
             }
         });
     }
@@ -65,6 +65,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
             @Override
             public void run() {
                 Toast.makeText(getActivity(), "Barcodes:"+value, Toast.LENGTH_SHORT).show();
+                sendToBlankActivity(value);
             }
         });
     }
@@ -72,6 +73,11 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
     @Override
     public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
 
+    }
+    private void sendToBlankActivity(final String str){
+        Intent intent = new Intent(getActivity(),BlankActivity.class);
+        intent.putExtra(String.valueOf(BARCODE_KEY),str);
+        startActivity(intent);
     }
 
     @Override
