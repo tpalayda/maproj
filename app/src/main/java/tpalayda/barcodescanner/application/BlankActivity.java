@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import tpalayda.barcodescanner.R;
 
@@ -28,7 +30,7 @@ public class BlankActivity extends AppCompatActivity {
     private EditText m_date;
     private EditText m_product;
     private Spinner  m_category;
-
+    private Button m_save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,9 +41,17 @@ public class BlankActivity extends AppCompatActivity {
         m_date     = findViewById(R.id.date_id);
         m_product  = findViewById(R.id.product_id);
         m_category = findViewById(R.id.category_id);
+        m_save = findViewById(R.id.save_id);
 
-        String[] items = new String[]{"products","technology","other"};
+        String[] items = BarcodeBank.getInstance(BlankActivity.this).getCategories();
 
+        m_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BarcodeBank.getInstance(BlankActivity.this).addBarcodeInf(new BarcodeInf(m_id.getText().toString(),m_product.getText().toString(),m_category.getSelectedItem().toString(),UUID.randomUUID()));
+                finish();
+            }
+        });
         m_category.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,items));
         m_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

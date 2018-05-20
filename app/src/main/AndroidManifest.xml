@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".application.BarcodeFragmentActivity" />
+        <activity android:name=".application.BarcodeFragmentActivity" android:noHistory="true" />
         <activity android:name=".application.BlankActivity" />
         <activity android:name=".application.BarcodeListActivity"></activity>
     </application>

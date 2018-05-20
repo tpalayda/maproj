@@ -35,7 +35,6 @@
             android:editable="false"
             android:ems="70"
             android:hint="Date"
-            android:inputType="date"
             android:textAlignment="center" />
     </LinearLayout>
     <LinearLayout
@@ -51,6 +50,9 @@
             android:inputType="textAutoCorrect"
             android:textAlignment="center" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Spinner
         android:id="@+id/category_id"
         android:layout_width="match_parent"
@@ -59,5 +61,18 @@
         android:layout_gravity="center"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:id="@+id/save_id"
+            android:layout_marginTop="20dp"
+            />
+    </LinearLayout>
 </LinearLayout>

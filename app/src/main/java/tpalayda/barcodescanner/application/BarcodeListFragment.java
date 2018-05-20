@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -41,23 +43,35 @@ public class BarcodeListFragment extends Fragment {
         updateUI();
         return view;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId())
+        {
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     private class BarcodeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView m_barcodeTextView;
+        private TextView m_productTextView;
         private BarcodeInf m_barcodeInf;
 
         public BarcodeHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_barcodes,parent,false));
             itemView.setOnClickListener(this);
-            m_barcodeTextView = itemView.findViewById(R.id.barcodes_id);
+            //m_barcodeTextView = itemView.findViewById(R.id.barcodes_id);
+            m_productTextView = itemView.findViewById(R.id.products_id);
         }
+
         @Override
         public void onClick(View view) {
-
+            Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_LONG).show();
         }
         public void bind(BarcodeInf barcodeInf){
             m_barcodeInf = barcodeInf;
-            m_barcodeTextView.setText(m_barcodeInf.getBarcodeID());
+           // m_barcodeTextView.setText(m_barcodeInf.getBarcodeID());
+            m_productTextView.setText(m_barcodeInf.getProductName());
         }
     }
     private class BarcodeAdapter extends RecyclerView.Adapter<BarcodeHolder> {
