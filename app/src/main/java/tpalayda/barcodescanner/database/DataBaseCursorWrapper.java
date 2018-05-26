@@ -22,8 +22,9 @@ public class DataBaseCursorWrapper  extends CursorWrapper{
         int priceInt = getInt(getColumnIndex(database.BarcodeTable.Cols.PRICE));
         String categoryString = getString(getColumnIndex(database.BarcodeTable.Cols.CATEGORY));
         String productString = getString(getColumnIndex(database.BarcodeTable.Cols.PRODUCT));
+        String dateString = getString(getColumnIndex(database.BarcodeTable.Cols.DATE));
 
-        BarcodeInf barcodeInf = new BarcodeInf(barcodeIDString,productString,categoryString, UUID.fromString(uuidString),priceInt);
+        BarcodeInf barcodeInf = new BarcodeInf(barcodeIDString,productString,categoryString, UUID.fromString(uuidString),priceInt,dateString);
         return barcodeInf;
     }
 }

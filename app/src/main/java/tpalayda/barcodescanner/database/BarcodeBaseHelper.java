@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import tpalayda.barcodescanner.application.BarcodeBank;
@@ -29,10 +31,11 @@ public class BarcodeBaseHelper extends SQLiteOpenHelper {
                 database.BarcodeTable.Cols.BARCODEID + ", "           +
                 database.BarcodeTable.Cols.PRICE + ", "               +
                 database.BarcodeTable.Cols.PRODUCT + ", "             +
+                database.BarcodeTable.Cols.DATE + ", "                +
                 database.BarcodeTable.Cols.CATEGORY + ")"
         );
         for(int i = 0; i < 20; ++i){
-            ContentValues values = BarcodeBank.getContentValues(new BarcodeInf(i+"","product"+i,"dasd", UUID.randomUUID()));
+            ContentValues values = BarcodeBank.getContentValues(new BarcodeInf(i+"","product"+i,"dasd", UUID.randomUUID(), DateFormat.getDateInstance().format(new Date())));
             db.insert(database.BarcodeTable.NAME,null,values);
         }
     }

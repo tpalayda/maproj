@@ -12,21 +12,24 @@ public class BarcodeInf {
     private String m_category;
     private UUID m_id;
     private int m_price;
+    private String m_date;
 
-    public BarcodeInf(String barcodeID,String productName,String category,UUID id,int price) {
+    public BarcodeInf(String barcodeID,String productName,String category,UUID id,int price, String date) {
         m_barcodeID = barcodeID;
         m_productName = productName;
         m_category = category;
         m_id = id;
         m_price = price;
+        m_date = date;
     }
 
-    public BarcodeInf(String barcodeID,String productName,String category,UUID id) {
+    public BarcodeInf(String barcodeID,String productName,String category,UUID id, String date) {
         m_barcodeID = barcodeID;
         m_productName = productName;
         m_category = category;
         m_id = id;
         m_price = 0;
+        m_date = date;
     }
 
     public String getBarcodeID() {
@@ -38,11 +41,10 @@ public class BarcodeInf {
     public int getPrice(){
         return m_price;
     }
-
+    public String getDate() { return m_date; }
     public String getProductName() {
         return m_productName;
     }
-
     public String getCategory() {
         return m_category;
     }
@@ -53,15 +55,12 @@ public class BarcodeInf {
     public void setPrice(int price) {
         this.m_price = price;
     }
-
     public void setProductName(String productName) {
         this.m_productName = productName;
     }
-
     public void setCategory(String category) {
         this.m_category = category;
     }
-    public void setUUID(UUID id){
-        this.m_id = id;
-    }
+    public void setUUID(UUID id){ this.m_id = id; }
+    public void setDate(String date) { this.m_date = date; }
 }
