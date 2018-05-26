@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class BarcodeListFragment extends Fragment {
     private RecyclerView m_recyclerView;
     private BarcodeAdapter m_adapter;
     private int m_adapterIndex;
+    private int m_item_id = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -47,6 +49,14 @@ public class BarcodeListFragment extends Fragment {
         updateUI();
         return view;
     }
+
+    @Override
+    public void onResume() {
+        if(m_item_id != -1)
+            updateUI();
+        super.onResume();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
@@ -80,6 +90,7 @@ public class BarcodeListFragment extends Fragment {
                     switch(menuItem.getItemId()){
                         case R.id.edit_barcode: {
                             Intent intent = BlankActivity.newIntent(getActivity(),m_barcodeInf.getUUID());
+                            m_item_id = getAdapterPosition();
                             startActivity(intent);
                             return true;
                         }
