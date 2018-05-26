@@ -31,6 +31,8 @@ public class BlankActivity extends AppCompatActivity {
     private EditText m_product;
     private Spinner  m_category;
     private Button m_save;
+    private static final String EXTRA_CURRENT_ID = "current_id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,5 +69,10 @@ public class BlankActivity extends AppCompatActivity {
         });
         m_id.setText("BarcodeID:"+getIntent().getStringExtra("111"));
         m_date.setText("Date:"+DateFormat.getDateInstance().format(new Date()));
+    }
+    public static Intent newIntent(Context packageContext, UUID index){
+        Intent intent = new Intent(packageContext,BlankActivity.class);
+        intent.putExtra(EXTRA_CURRENT_ID,index.toString());
+        return intent;
     }
 }

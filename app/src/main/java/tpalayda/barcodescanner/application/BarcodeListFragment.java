@@ -1,16 +1,20 @@
 package tpalayda.barcodescanner.application;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,10 +49,10 @@ public class BarcodeListFragment extends Fragment {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId())
-        {
-            default:
+        switch (item.getItemId()) {
+            default: {
                 return super.onOptionsItemSelected(item);
+            }
         }
     }
     private class BarcodeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -66,7 +70,30 @@ public class BarcodeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_LONG).show();
+            PopupMenu popupMenu = new PopupMenu(getContext(),view,Gravity.NO_GRAVITY,R.attr.actionOverflowMenuStyle,0);
+            popupMenu.inflate(R.menu.options_menu);
+            popupMenu.show();
+
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch(menuItem.getItemId()){
+                        case R.id.edit_barcode: {
+                            Intent intent = BlankActivity.newIntent(getActivity(),m_barcodeInf.getUUID());
+                            startActivity(intent);
+                            return true;
+                        }
+                        case R.id.remove_barcode:{
+                            BarcodeBank.getInstance(getContext()).removeBarcodeInf(m_barcodeInf);
+                            m_adapter.notifyItemRemoved(getAdapterPosition());
+                            return  true;
+                        }
+                        default:
+                            return false;
+                    }
+
+                }
+            });
         }
         public void bind(BarcodeInf barcodeInf){
             m_barcodeInf = barcodeInf;
