@@ -97,7 +97,7 @@ public class BarcodeBank {
         values.put(database.BarcodeTable.Cols.PRODUCT,barcodeInf.getProductName());
         values.put(database.BarcodeTable.Cols.DATE,barcodeInf.getDate());
         values.put(database.BarcodeTable.Cols.CATEGORY,barcodeInf.getCategory());
-
+        values.put(database.BarcodeTable.Cols.OTHER,barcodeInf.getOtherInf());
         return values;
     }
 }

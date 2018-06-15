@@ -80,7 +80,7 @@ public class BarcodeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            PopupMenu popupMenu = new PopupMenu(getContext(),view,Gravity.NO_GRAVITY,R.attr.actionOverflowMenuStyle,0);
+            PopupMenu popupMenu = new PopupMenu(getContext(),view,Gravity.CENTER,R.attr.actionOverflowMenuStyle,0);
             popupMenu.inflate(R.menu.options_menu);
             popupMenu.show();
 
@@ -89,7 +89,7 @@ public class BarcodeListFragment extends Fragment {
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     switch(menuItem.getItemId()){
                         case R.id.edit_barcode: {
-                            Intent intent = BlankActivity.newIntent(getActivity(),m_barcodeInf.getUUID());
+                            Intent intent = EditBlankActivity.newIntent(getActivity(),m_barcodeInf.getUUID());
                             m_item_id = getAdapterPosition();
                             startActivity(intent);
                             return true;
@@ -97,6 +97,7 @@ public class BarcodeListFragment extends Fragment {
                         case R.id.remove_barcode:{
                             BarcodeBank.getInstance(getContext()).removeBarcodeInf(m_barcodeInf);
                             m_adapter.notifyItemRemoved(getAdapterPosition());
+                            updateUI();
                             return  true;
                         }
                         default:

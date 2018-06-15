@@ -13,27 +13,38 @@ public class BarcodeInf {
     private UUID m_id;
     private int m_price;
     private String m_date;
+    private String m_other_inf;
 
-    public BarcodeInf(String barcodeID,String productName,String category,UUID id,int price, String date) {
+    public BarcodeInf(String barcodeID,String productName,String category,UUID id,int price, String date, String other_inf) {
         m_barcodeID = barcodeID;
         m_productName = productName;
         m_category = category;
         m_id = id;
         m_price = price;
         m_date = date;
+        m_other_inf = other_inf;
     }
 
-    public BarcodeInf(String barcodeID,String productName,String category,UUID id, String date) {
+    public BarcodeInf(String barcodeID,String productName,String category,UUID id, String date, String other_inf) {
         m_barcodeID = barcodeID;
         m_productName = productName;
         m_category = category;
         m_id = id;
         m_price = 0;
         m_date = date;
+        m_other_inf = other_inf;
     }
 
     public String getBarcodeID() {
         return m_barcodeID;
+    }
+    public String getOtherInf()
+    {
+        return m_other_inf;
+    }
+    public void setOtherInf(String other_inf)
+    {
+        m_other_inf = other_inf;
     }
     public UUID getUUID(){
         return m_id;

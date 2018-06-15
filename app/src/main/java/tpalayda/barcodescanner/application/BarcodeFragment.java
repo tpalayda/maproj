@@ -3,6 +3,7 @@ package tpalayda.barcodescanner.application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(URLUtil.isValidUrl(barcode.displayValue))
+                if(URLUtil.isValidUrl(barcode.displayValue) || !barcode.displayValue.toString().trim().matches("^[0-9]*$"))
                     sendToBlankActivity(barcode.displayValue,true);
                 else
                     sendToBlankActivity(barcode.displayValue,false);

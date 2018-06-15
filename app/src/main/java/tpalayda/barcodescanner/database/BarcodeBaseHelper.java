@@ -32,10 +32,11 @@ public class BarcodeBaseHelper extends SQLiteOpenHelper {
                 database.BarcodeTable.Cols.PRICE + ", "               +
                 database.BarcodeTable.Cols.PRODUCT + ", "             +
                 database.BarcodeTable.Cols.DATE + ", "                +
+                database.BarcodeTable.Cols.OTHER + ", "               +
                 database.BarcodeTable.Cols.CATEGORY + ")"
         );
-        for(int i = 0; i < 20; ++i){
-            ContentValues values = BarcodeBank.getContentValues(new BarcodeInf(i+"","product"+i,"dasd", UUID.randomUUID(), DateFormat.getDateInstance().format(new Date())));
+        for(int i = 0; i < 10; ++i){
+            ContentValues values = BarcodeBank.getContentValues(new BarcodeInf(i+"","product"+i,"dasd", UUID.randomUUID(), DateFormat.getDateInstance().format(new Date()),""));
             db.insert(database.BarcodeTable.NAME,null,values);
         }
     }
