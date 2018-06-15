@@ -18,6 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'

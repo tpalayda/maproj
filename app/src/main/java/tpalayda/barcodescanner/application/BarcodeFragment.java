@@ -3,11 +3,13 @@ package tpalayda.barcodescanner.application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.barcode.Barcode;
@@ -21,7 +23,7 @@ import tpalayda.barcodescanner.R;
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
 
     private BarcodeReader m_barcodeReader;
-    private final int BARCODE_KEY = 111;
+    public static final int BARCODE_KEY = 111;
     public BarcodeFragment(){}
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -42,20 +44,19 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
 
     @Override
     public void onScanned(final Barcode barcode) {
-        Log.e("123","scanned:"+barcode.displayValue);
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getActivity(), "Barcode:" + barcode.displayValue, Toast.LENGTH_SHORT).show();
-                sendToBlankActivity(barcode.displayValue);
+                if(URLUtil.isValidUrl(barcode.displayValue) || !barcode.displayValue.toString().trim().matches("^[0-9]*$"))
+                    sendToBlankActivity(barcode.displayValue,true);
+                else
+                    sendToBlankActivity(barcode.displayValue,false);
             }
         });
     }
 
     @Override
-    public void onScannedMultiple(List<Barcode> barcodes) {
-        Log.e("123","multiplyscanned:"+barcodes.size());
-
+    public void onScannedMultiple(final List<Barcode> barcodes) {
         String values = "";
         for(Barcode barcode : barcodes){
             values += barcode.displayValue + ", ";
@@ -64,8 +65,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getActivity(), "Barcodes:"+value, Toast.LENGTH_SHORT).show();
-                sendToBlankActivity(value);
+                sendToBlankActivity(value,true);
             }
         });
     }
@@ -74,9 +74,10 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
     public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
 
     }
-    private void sendToBlankActivity(final String str){
+    private void sendToBlankActivity(final String str,final boolean barcode2D){
         Intent intent = new Intent(getActivity(),BlankActivity.class);
         intent.putExtra(String.valueOf(BARCODE_KEY),str);
+        intent.putExtra("barcodeType",barcode2D);
         startActivity(intent);
     }
 

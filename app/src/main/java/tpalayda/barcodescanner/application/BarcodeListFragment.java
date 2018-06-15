@@ -1,16 +1,21 @@
 package tpalayda.barcodescanner.application;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ public class BarcodeListFragment extends Fragment {
     private RecyclerView m_recyclerView;
     private BarcodeAdapter m_adapter;
     private int m_adapterIndex;
+    private int m_item_id = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -43,12 +49,20 @@ public class BarcodeListFragment extends Fragment {
         updateUI();
         return view;
     }
+
+    @Override
+    public void onResume() {
+        if(m_item_id != -1)
+            updateUI();
+        super.onResume();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId())
-        {
-            default:
+        switch (item.getItemId()) {
+            default: {
                 return super.onOptionsItemSelected(item);
+            }
         }
     }
     private class BarcodeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -66,7 +80,32 @@ public class BarcodeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_LONG).show();
+            PopupMenu popupMenu = new PopupMenu(getContext(),view,Gravity.CENTER,R.attr.actionOverflowMenuStyle,0);
+            popupMenu.inflate(R.menu.options_menu);
+            popupMenu.show();
+
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch(menuItem.getItemId()){
+                        case R.id.edit_barcode: {
+                            Intent intent = EditBlankActivity.newIntent(getActivity(),m_barcodeInf.getUUID());
+                            m_item_id = getAdapterPosition();
+                            startActivity(intent);
+                            return true;
+                        }
+                        case R.id.remove_barcode:{
+                            BarcodeBank.getInstance(getContext()).removeBarcodeInf(m_barcodeInf);
+                            m_adapter.notifyItemRemoved(getAdapterPosition());
+                            updateUI();
+                            return  true;
+                        }
+                        default:
+                            return false;
+                    }
+
+                }
+            });
         }
         public void bind(BarcodeInf barcodeInf){
             m_barcodeInf = barcodeInf;

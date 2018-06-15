@@ -45,7 +45,7 @@ public class BarcodeBank {
         return barcodes;
 
     }
-    public String[] getCategories()
+    public List<String> getCategories()
     {
         List<BarcodeInf> barcodes =  getBarcodes();
         List<String> categories = new ArrayList<String>();
@@ -55,9 +55,9 @@ public class BarcodeBank {
             else
                 categories.add(barcode.getCategory());
         }
-        String[] categoriesString = new String[categories.size()];
-        categoriesString = categories.toArray(categoriesString);
-        return categoriesString;
+       // String[] categoriesString = new String[categories.size()];
+        //categoriesString = categories.toArray(categoriesString);
+        return categories;
     }
     public BarcodeInf getBarcode(UUID id){
         DataBaseCursorWrapper cursor = queryBarcodes(database.BarcodeTable.Cols.UUID + " = ? ",new String[]{id.toString()});
@@ -95,8 +95,9 @@ public class BarcodeBank {
         values.put(database.BarcodeTable.Cols.BARCODEID,barcodeInf.getBarcodeID());
         values.put(database.BarcodeTable.Cols.PRICE,barcodeInf.getPrice());
         values.put(database.BarcodeTable.Cols.PRODUCT,barcodeInf.getProductName());
+        values.put(database.BarcodeTable.Cols.DATE,barcodeInf.getDate());
         values.put(database.BarcodeTable.Cols.CATEGORY,barcodeInf.getCategory());
-
+        values.put(database.BarcodeTable.Cols.OTHER,barcodeInf.getOtherInf());
         return values;
     }
 }

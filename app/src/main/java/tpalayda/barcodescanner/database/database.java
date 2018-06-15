@@ -13,6 +13,8 @@ public class database {
             public static final String BARCODEID = "barcodeID";
             public static final String PRICE = "price";
             public static final String PRODUCT = "product";
+            public static final String DATE = "date";
+            public static final String OTHER = "other";
             public static final String CATEGORY = "category";
         }
     }
