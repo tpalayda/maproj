@@ -42,10 +42,6 @@ public class BarcodeInf {
     {
         return m_other_inf;
     }
-    public void setOtherInf(String other_inf)
-    {
-        m_other_inf = other_inf;
-    }
     public UUID getUUID(){
         return m_id;
     }
@@ -74,4 +70,5 @@ public class BarcodeInf {
     }
     public void setUUID(UUID id){ this.m_id = id; }
     public void setDate(String date) { this.m_date = date; }
+    public void setOtherInf(String other_inf) {m_other_inf = other_inf; }
 }
